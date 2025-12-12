@@ -1,3 +1,8 @@
 name = "esl-scoping-review"
+main = "src/worker.js"
 compatibility_date = "2024-09-23"
-pages_build_output_dir = "."
+
+# Configures the Worker to serve static assets from the "public" directory
+[assets]
+directory = "public"
+binding = "ASSETS"
