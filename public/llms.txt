@@ -1,0 +1,44 @@
+# Theories and Mechanisms for AI-Powered ESL Speaking System Design
+> A Scoping Review of 17 Empirical Studies (2015-2025)
+
+**Author:** Joe (Beiqiao) Hu  
+**Date:** December 1, 2025  
+**Type:** Systematic Scoping Review (PRISMA-ScR)  
+**URL:** https://eslr.hubeiqiao.com/
+
+## Executive Summary
+This review systematically maps the theories and mechanisms that support the design of AI-powered speaking practice systems for adult English as a Second Language (ESL) learners. It synthesizes 17 empirical studies to provide a blueprint for "business-ready" AI-ESL solutions.
+
+## Core Findings
+
+### 1. The 6 Foundational Learning Theories
+These theories explain *why* specific AI interventions work:
+
+1.  **Skill Acquisition Theory:** Learning moves from Declarative (knowledge) → Procedural (practice) → Automatic (fluency). **Design Implication:** Systems must architect a practice curve from accuracy to speed.
+2.  **The Noticing Hypothesis:** Learners must consciously "notice" a gap to learn. **Design Implication:** Use "Pending Feedback" (elicitation) rather than immediate correction to trigger self-repair.
+3.  **Transfer-Appropriate Processing:** We learn best when practice mimics the test. **Design Implication:** Shift from blocked drills to impromptu, timed speaking tasks.
+4.  **Usage-Based Constructionist Theory:** Language is learned through the frequency of form-meaning pairings. **Design Implication:** Track and visualize "signature phrases" and construction reuse.
+5.  **Sociocultural Theory:** Learning happens in the Zone of Proximal Development. **Design Implication:** AI acts as a non-judgmental "More Knowledgeable Other" to lower anxiety.
+6.  **Retrieval Practice:** Spaced effort stabilizes memory. **Design Implication:** Use algorithms to optimize Inter-Session Intervals (ISI).
+
+### 2. The 10 Instructional Mechanisms
+These are the specific features that drive outcomes:
+
+1.  **Adaptive Spacing:** Tuning practice intervals based on individual retention.
+2.  **Phased Practice:** Moving from Blocked (AAA) to Interleaved (ABC) schedules.
+3.  **Construction Reuse:** Forcing the use of specific phrases in new contexts.
+4.  **Explicit ASR Feedback:** Immediate, visual feedback on segmental errors (g=0.86 effect size).
+5.  **Pending/Elicited Feedback:** Withholding the answer to prompt learner thought.
+6.  **Partner Scaffolding:** Using AI as a conversational partner.
+7.  **Structured Orchestration:** Embedding AI in frameworks like BOPPPS (Bridge, Objective, Pre-assessment, Participatory Learning, Post-assessment, Summary).
+8.  **Mobile Micro-Practice:** Leveraging ubiquity for frequency.
+9.  **Graduated Difficulty:** Gating progress based on mastery.
+10. **Confidence Nudges:** Affective support to reduce anxiety.
+
+## Design Applications (KPIs)
+The review proposes four applications for product design:
+
+-   **The Progression Engine:** Manage the transition from controlled drills to spontaneous speech.
+-   **The Metacognitive Loop:** Turn learners into problem solvers via elicited feedback.
+-   **The Invisible Dashboard:** Visualize growth in vocabulary and fluency (not just accuracy).
+-   **The Hybrid Coach:** Combine ASR (micro-feedback) with LLMs (macro-discourse feedback).
