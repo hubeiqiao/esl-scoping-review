@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://esl-review.hubeiqiao.com/sitemap.xml
+Sitemap: https://eslr.hubeiqiao.com/sitemap.xml
