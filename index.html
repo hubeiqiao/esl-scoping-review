@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theories and Mechanisms for AI-Powered ESL Speaking System Design | Joe Hu</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A scoping review synthesizing 17 empirical studies to map theories and instructional mechanisms for AI-powered speaking practice systems for adult ESL learners.">
+    <meta name="keywords" content="AI, ESL, English learning, speaking practice, language acquisition, ASR, LLM, ChatGPT, pronunciation, fluency">
+    <meta name="author" content="Joe (Beiqiao) Hu">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hubeiqiao.com/research/ai-esl-speaking">
+    <meta property="og:title" content="Theories and Mechanisms for AI-Powered ESL Speaking System Design">
+    <meta property="og:description" content="A scoping review identifying 6 learning theories, 10 instructional mechanisms, and 4 design applications for AI-ESL speaking systems.">
+    <meta property="og:image" content="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg">
+    <meta property="article:author" content="Joe (Beiqiao) Hu">
+    <meta property="article:published_time" content="2025-12-01">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@hubeiqiao">
+    <meta name="twitter:creator" content="@hubeiqiao">
+    <meta name="twitter:title" content="AI-Powered ESL Speaking System Design: Theories & Mechanisms">
+    <meta name="twitter:description" content="Scoping review: 17 studies, 6 theories, 10 mechanisms, 4 design applications for AI-ESL speaking systems.">
+    <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg">
+    <link rel="apple-touch-icon" href="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            /* Colors */
+            --color-primary: #1a5f7a;
+            --color-primary-dark: #134b61;
+            --color-primary-light: #2d8cb8;
+            --color-accent: #e76f51;
+            --color-accent-light: #f4a261;
+            --color-accent-warm: #e9c46a;
+            --color-success: #2a9d8f;
+            --color-warning: #f4a261;
+            --color-bg: #faf8f5;
+            --color-bg-alt: #f5f1eb;
+            --color-bg-card: #ffffff;
+            --color-text: #2d3436;
+            --color-text-light: #636e72;
+            --color-text-muted: #b2bec3;
+            --color-border: #dfe6e9;
+
+            /* Typography */
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Source Serif 4', Georgia, serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+
+            /* Sizing */
+            --max-width: 1200px;
+            --max-width-narrow: 800px;
+            --max-width-wide: 1400px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 400ms ease;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-text);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+        h4 { font-size: 1.25rem; }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-title {
+            margin-bottom: var(--space-lg);
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            color: var(--color-text-light);
+            max-width: 65ch;
+        }
+
+        /* ============================================
+           LAYOUT UTILITIES
+           ============================================ */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .container--narrow {
+            max-width: var(--max-width-narrow);
+        }
+
+        .container--wide {
+            max-width: var(--max-width-wide);
+        }
+
+        section {
+            padding: var(--space-4xl) 0;
+        }
+
+        .section--alt {
+            background: var(--color-bg-alt);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-xl);
+        }
+
+        .grid--2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid--4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            transform: translateY(-100%);
+            transition: transform var(--transition-base);
+        }
+
+        .nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) var(--space-lg);
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+        }
+
+        .nav__logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-primary);
+        }
+
+        .nav__links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav__links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .nav__links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            width: 0%;
+            transition: width 100ms linear;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(26, 95, 122, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(231, 111, 81, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+        }
+
+        .hero__left {
+            max-width: 600px;
+        }
+
+        .hero__right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .hero__visual-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .hero__visual-card--accent {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%);
+            color: white;
+            border: none;
+        }
+
+        @media (max-width: 900px) {
+            .hero__content {
+                grid-template-columns: 1fr;
+            }
+            .hero__right {
+                display: none;
+            }
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--space-xl);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .hero__badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero__title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            max-width: 15ch;
+            animation: fadeInUp 0.6s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero__title-highlight {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--color-text-light);
+            max-width: 50ch;
+            margin-bottom: var(--space-2xl);
+            animation: fadeInUp 0.6s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero__meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            animation: fadeInUp 0.6s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .hero__avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid var(--color-bg-card);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero__author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero__author-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .hero__author-role {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+        }
+
+        .hero__social {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .hero__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text-light);
+            transition: all var(--transition-fast);
+        }
+
+        .hero__social-link:hover {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero__date {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Grid */
+        .hero__stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            animation: fadeInUp 0.6s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero__stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary);
+        }
+
+        .stat-card__number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-card__label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .stat-card--accent .stat-card__number {
+            color: var(--color-accent);
+        }
+
+        .stat-card--success .stat-card__number {
+            color: var(--color-success);
+        }
+
+        .stat-card--warning .stat-card__number {
+            color: var(--color-warning);
+        }
+
+        /* ============================================
+           ABSTRACT SECTION
+           ============================================ */
+        .abstract {
+            background: var(--color-bg-card);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .abstract__content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: var(--space-3xl);
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .abstract__content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        .abstract__sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .abstract__keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--color-text-light);
+        }
+
+        .abstract__text {
+            font-size: 1.125rem;
+            color: var(--color-text);
+        }
+
+        .abstract__text p {
+            margin-bottom: var(--space-lg);
+        }
+
+        .abstract__highlight {
+            background: linear-gradient(120deg, rgba(26, 95, 122, 0.1) 0%, rgba(231, 111, 81, 0.1) 100%);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-primary);
+            margin: var(--space-xl) 0;
+        }
+
+        .abstract__highlight strong {
+            color: var(--color-primary);
+        }
+
+        /* ============================================
+           EXECUTIVE SUMMARY
+           ============================================ */
+        .exec-summary__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        @media (max-width: 900px) {
+            .exec-summary__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-base);
+        }
+
+        .summary-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .summary-card__icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .summary-card__icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .summary-card__title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .summary-card__text {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* Top 5 Lists */
+        .top5-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-2xl);
+        }
+
+        @media (max-width: 900px) {
+            .top5-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .top5-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .top5-card__header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: var(--space-lg);
+        }
+
+        .top5-card__header h3 {
+            color: white;
+            font-size: 1.125rem;
+            margin: 0;
+        }
+
+        .top5-card__list {
+            list-style: none;
+            padding: var(--space-md);
+        }
+
+        .top5-card__item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            transition: background var(--transition-fast);
+        }
+
+        .top5-card__item:hover {
+            background: var(--color-bg-alt);
+        }
+
+        .top5-card__number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .top5-card__content {
+            flex: 1;
+        }
+
+        .top5-card__title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .top5-card__desc {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           INTRODUCTION SECTION
+           ============================================ */
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin: var(--space-3xl) 0;
+        }
+
+        @media (max-width: 900px) {
+            .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .challenge-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            text-align: center;
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transition: transform var(--transition-base);
+        }
+
+        .challenge-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .challenge-card__icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-lg);
+            background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .challenge-card__icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--color-primary);
+        }
+
+        .challenge-card__title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--color-primary);
+        }
+
+        .challenge-card__text {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        .challenge-card__citation {
+            margin-top: var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Research Questions */
+        .rq-container {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-3xl);
+            color: white;
+            margin: var(--space-3xl) 0;
+        }
+
+        .rq-container h3 {
+            color: white;
+            margin-bottom: var(--space-xl);
+        }
+
+        .rq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 768px) {
+            .rq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .rq-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            backdrop-filter: blur(10px);
+        }
+
+        .rq-card__label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: var(--space-sm);
+        }
+
+        .rq-card__text {
+            font-size: 1.125rem;
+            line-height: 1.5;
+        }
+
+        /* PCC Framework */
+        .pcc-framework {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-2xl);
+        }
+
+        .pcc-item {
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            text-align: center;
+            min-width: 200px;
+            transition: all var(--transition-base);
+        }
+
+        .pcc-item:hover {
+            border-color: var(--color-primary);
+            transform: scale(1.05);
+        }
+
+        .pcc-item__label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .pcc-item__value {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* ============================================
+           METHODS SECTION - PRISMA
+           ============================================ */
+        .prisma-flow {
+            max-width: 900px;
+            margin: var(--space-3xl) auto;
+        }
+
+        .prisma-stage {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+        }
+
+        .prisma-stage::after {
+            content: '';
+            position: absolute;
+            left: 60px;
+            top: 100%;
+            width: 2px;
+            height: var(--space-xl);
+            background: var(--color-border);
+        }
+
+        .prisma-stage:last-child::after {
+            display: none;
+        }
+
+        .prisma-stage__label {
+            flex-shrink: 0;
+            width: 120px;
+            padding: var(--space-md);
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .prisma-stage__content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .prisma-box {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-md) var(--space-lg);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .prisma-box__number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .prisma-box__label {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        .prisma-box--excluded {
+            background: var(--color-bg-alt);
+            border-color: var(--color-accent);
+        }
+
+        .prisma-box--excluded .prisma-box__number {
+            color: var(--color-accent);
+        }
+
+        .prisma-box--final {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border: none;
+        }
+
+        .prisma-box--final .prisma-box__number,
+        .prisma-box--final .prisma-box__label {
+            color: white;
+        }
+
+        /* Database Pills */
+        .database-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin: var(--space-2xl) 0;
+        }
+
+        .database-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            transition: all var(--transition-fast);
+        }
+
+        .database-pill:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .database-pill__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-primary);
+        }
+
+        /* ============================================
+           ANIMATION UTILITIES
+           ============================================ */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+
+        /* ============================================
+           RESPONSIVE ADJUSTMENTS
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav__links {
+                display: none;
+            }
+
+            .hero__meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            section {
+                padding: var(--space-2xl) 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="#" class="nav__logo">AI-ESL Research</a>
+            <ul class="nav__links">
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#theories">Theories</a></li>
+                <li><a href="#mechanisms">Mechanisms</a></li>
+                <li><a href="#findings">Findings</a></li>
+                <li><a href="#applications">Applications</a></li>
+            </ul>
+        </div>
+        <div class="nav__progress" id="progress"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero__content">
+            <!-- Left Column -->
+            <div class="hero__left">
+            <div class="hero__badge">
+                <span class="hero__badge-dot"></span>
+                Scoping Review | TIMG 5104 Directed Studies
+            </div>
+
+            <h1 class="hero__title">
+                <span class="hero__title-highlight">Theories & Mechanisms</span> for AI-Powered ESL Speaking System Design
+            </h1>
+
+            <p class="hero__subtitle">
+                A systematic scoping review mapping the evidence-based foundations for designing AI-powered speaking practice systems for adult English as a Second Language learners.
+            </p>
+
+            <div class="hero__meta">
+                <div class="hero__author">
+                    <img src="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg" alt="Joe Hu" class="hero__avatar">
+                    <div class="hero__author-info">
+                        <span class="hero__author-name">Joe (Beiqiao) Hu</span>
+                        <span class="hero__author-role">Researcher & Designer</span>
+                    </div>
+                </div>
+
+                <div class="hero__social">
+                    <a href="https://hubeiqiao.com" class="hero__social-link" title="Website" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </a>
+                    <a href="https://x.com/hubeiqiao" class="hero__social-link" title="Twitter/X" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hubeiqiao/" class="hero__social-link" title="LinkedIn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <span class="hero__date">December 1, 2025</span>
+            </div>
+            </div>
+
+            <!-- Right Column - Visual Summary -->
+            <div class="hero__right">
+                <div class="hero__visual-card hero__visual-card--accent">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">RESEARCH FRAMEWORK</div>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                        <div style="display: flex; align-items: center; gap: var(--space-md);">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📚</div>
+                            <div>
+                                <div style="font-weight: 600;">6 Learning Theories</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">ACT-R, Usage-Based, SCT, Interactionist...</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-md);">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⚙️</div>
+                            <div>
+                                <div style="font-weight: 600;">10 Mechanisms</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Practice scheduling, feedback, scaffolding...</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-md);">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🎯</div>
+                            <div>
+                                <div style="font-weight: 600;">4 Design Applications</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Scheduler, Feedback, BOPPPS, Tracker</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero__visual-card">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--color-text-muted); margin-bottom: var(--space-sm);">KEY EVIDENCE</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                        <div style="text-align: center; padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">g=0.86</div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-light);">Explicit Feedback</div>
+                        </div>
+                        <div style="text-align: center; padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-accent);">+20%</div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-light);">Articulation Rate</div>
+                        </div>
+                        <div style="text-align: center; padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-success);">d=1.40</div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-light);">Vocabulary Retention</div>
+                        </div>
+                        <div style="text-align: center; padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-warning);">4×</div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-light);">vs. CALL Baseline</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="container" style="margin-top: var(--space-2xl);">
+            <div class="hero__stats">
+                <div class="stat-card">
+                    <div class="stat-card__number">17</div>
+                    <div class="stat-card__label">Empirical Studies</div>
+                </div>
+                <div class="stat-card stat-card--accent">
+                    <div class="stat-card__number">6</div>
+                    <div class="stat-card__label">Learning Theories</div>
+                </div>
+                <div class="stat-card stat-card--success">
+                    <div class="stat-card__number">10</div>
+                    <div class="stat-card__label">Mechanisms</div>
+                </div>
+                <div class="stat-card stat-card--warning">
+                    <div class="stat-card__number">4</div>
+                    <div class="stat-card__label">Design Applications</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="abstract" id="abstract">
+        <div class="container">
+            <div class="abstract__content">
+                <aside class="abstract__sidebar">
+                    <span class="section-label">Abstract</span>
+                    <div class="abstract__keywords">
+                        <span class="keyword-tag">AI</span>
+                        <span class="keyword-tag">ESL</span>
+                        <span class="keyword-tag">Speaking</span>
+                        <span class="keyword-tag">ASR</span>
+                        <span class="keyword-tag">LLM</span>
+                        <span class="keyword-tag">Fluency</span>
+                        <span class="keyword-tag">Feedback</span>
+                        <span class="keyword-tag">PRISMA-ScR</span>
+                    </div>
+                </aside>
+
+                <div class="abstract__text">
+                    <p>
+                        This scoping review systematically maps the theories and mechanisms that support the design of AI-powered speaking practice systems for adult English as a Second Language (ESL) learners. Following <strong>PRISMA-ScR guidelines</strong>, the review synthesized 17 empirical studies published between 2015 and 2025, selected through a mechanism-focused purposive sampling strategy employing an <strong>AI-human hybrid triangulation protocol</strong>.
+                    </p>
+
+                    <div class="abstract__highlight">
+                        <strong>Key Outputs:</strong> The review identifies <strong>6 foundational learning theories</strong>, isolates <strong>10 instructional mechanisms</strong>, and proposes <strong>4 evidence-based design applications</strong> with concrete KPIs, together forming a theory-driven blueprint for business-ready AI-ESL speaking systems.
+                    </div>
+
+                    <p>
+                        The synthesis identifies six foundational learning theories&mdash;including Skill Acquisition Theory, the Noticing Hypothesis, and Transfer-Appropriate Processing&mdash;that justify specific design choices. Key findings indicate that <strong>explicit, multi-modal feedback</strong> (ASR for pronunciation, pending prompts for grammar, LLM dialogue for discourse) significantly outperforms single-mode correction.
+                    </p>
+
+                    <p>
+                        Furthermore, embedding AI tools within <strong>structured pedagogical frameworks</strong> (e.g., BOPPPS) amplifies their effectiveness by fostering metacognition. The report proposes a <strong>"Theory-Mechanism-Design" (TMD) logic</strong> for feature validation to guide the development of business-ready AI-ESL solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary Section -->
+    <section class="section--alt" id="executive-summary">
+        <div class="container">
+            <span class="section-label">Executive Summary</span>
+            <h2 class="section-title">Purpose, Methods & Key Outputs</h2>
+
+            <div class="exec-summary__grid">
+                <div class="summary-card animate-on-scroll">
+                    <div class="summary-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                    </div>
+                    <h3 class="summary-card__title">Purpose & Scope</h3>
+                    <p class="summary-card__text">
+                        Synthesize 17 empirical studies (2015-2025) to map theories and mechanisms driving AI-powered speaking practice systems. Focus on <em>why</em> interventions work and how to translate them into product-ready features.
+                    </p>
+                </div>
+
+                <div class="summary-card animate-on-scroll stagger-1">
+                    <div class="summary-card__icon" style="background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    </div>
+                    <h3 class="summary-card__title">Methods</h3>
+                    <p class="summary-card__text">
+                        PRISMA-ScR guided purposive sampling across 6 databases (Scopus, Web of Science, EBSCO, JSTOR, ERIC, PsycInfo). AI-human hybrid screening processed 2,877 records, retaining 17 mechanism-rich studies.
+                    </p>
+                </div>
+
+                <div class="summary-card animate-on-scroll stagger-2">
+                    <div class="summary-card__icon" style="background: linear-gradient(135deg, var(--color-success) 0%, #3cba92 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h3 class="summary-card__title">Design Target</h3>
+                    <p class="summary-card__text">
+                        An AI-enabled speaking coach for real-world, impromptu fluency&mdash;where learners rehearse spontaneous speech, receive multi-layered feedback, and build long-term autonomy.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Top 5 Lists -->
+            <div class="top5-section">
+                <div class="top5-card animate-on-scroll">
+                    <div class="top5-card__header">
+                        <h3>Top 5 Instructional Mechanisms</h3>
+                    </div>
+                    <ul class="top5-card__list">
+                        <li class="top5-card__item">
+                            <span class="top5-card__number">1</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Phased Practice</div>
+                                <div class="top5-card__desc">Start blocked, then interleave tasks as accuracy stabilizes</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number">2</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Adaptive Spacing</div>
+                                <div class="top5-card__desc">Tune inter-session intervals based on performance</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number">3</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Explicit ASR Feedback</div>
+                                <div class="top5-card__desc">Immediate, segmental feedback with replay/compare</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number">4</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Pending/Elicited Feedback</div>
+                                <div class="top5-card__desc">Delay corrections to prompt self-repair</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number">5</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Structured Orchestration</div>
+                                <div class="top5-card__desc">BOPPPS: clear objectives, guided practice, reflection</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="top5-card animate-on-scroll stagger-1">
+                    <div class="top5-card__header" style="background: linear-gradient(135deg, var(--color-accent) 0%, #c0392b 100%);">
+                        <h3>Top 5 Design Principles</h3>
+                    </div>
+                    <ul class="top5-card__list">
+                        <li class="top5-card__item">
+                            <span class="top5-card__number" style="background: var(--color-accent);">1</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Architect the Practice Curve</div>
+                                <div class="top5-card__desc">Progression engine: blocked &rarr; interleaved &rarr; spontaneous</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number" style="background: var(--color-accent);">2</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Prioritize Metacognition</div>
+                                <div class="top5-card__desc">Prompts, hints, and reflection make learners problem-solvers</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number" style="background: var(--color-accent);">3</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Visualize Invisible Gains</div>
+                                <div class="top5-card__desc">Dashboards for construction growth and signature phrases</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number" style="background: var(--color-accent);">4</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Lower Anxiety Before Load</div>
+                                <div class="top5-card__desc">Safe practice space with confidence nudges</div>
+                            </div>
+                        </li>
+                        <li class="top5-card__item">
+                            <span class="top5-card__number" style="background: var(--color-accent);">5</span>
+                            <div class="top5-card__content">
+                                <div class="top5-card__title">Hybridize Feedback</div>
+                                <div class="top5-card__desc">ASR (micro) + Grammar prompts (meso) + LLM (macro)</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction">
+        <div class="container">
+            <span class="section-label">Section 1</span>
+            <h2 class="section-title">Introduction: The ESL Challenge</h2>
+            <p class="lead">
+                This review synthesizes theories and mechanisms to guide the design of AI-powered systems that support adult ESL learners in developing speaking proficiency.
+            </p>
+
+            <div class="challenges-grid">
+                <div class="challenge-card animate-on-scroll">
+                    <div class="challenge-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 class="challenge-card__title">Lack of Practice</h3>
+                    <p class="challenge-card__text">
+                        Insufficient time for meaningful, interactive speaking practice in typical classroom settings. Limited in-class time and large class sizes make individualized practice impossible.
+                    </p>
+                    <p class="challenge-card__citation">Mingyan et al., 2025</p>
+                </div>
+
+                <div class="challenge-card animate-on-scroll stagger-1">
+                    <div class="challenge-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M8 15h8"></path><path d="M9 9h.01"></path><path d="M15 9h.01"></path></svg>
+                    </div>
+                    <h3 class="challenge-card__title">Speaking Anxiety</h3>
+                    <p class="challenge-card__text">
+                        Fear of negative evaluation and linguistic insecurity leads to reluctance to speak and hinders skill development. Foreign language anxiety significantly impacts willingness to communicate.
+                    </p>
+                    <p class="challenge-card__citation">Zheng et al., 2025</p>
+                </div>
+
+                <div class="challenge-card animate-on-scroll stagger-2">
+                    <div class="challenge-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line></svg>
+                    </div>
+                    <h3 class="challenge-card__title">Inadequate Feedback</h3>
+                    <p class="challenge-card__text">
+                        Teachers struggle to provide consistent, individualized, and immediate feedback required for effective learning due to time constraints.
+                    </p>
+                    <p class="challenge-card__citation">Ngo et al., 2024; Sun, 2023</p>
+                </div>
+            </div>
+
+            <!-- Research Questions -->
+            <div class="rq-container animate-on-scroll">
+                <h3>Research Questions</h3>
+                <p style="opacity: 0.9; margin-bottom: var(--space-lg);">
+                    Structured using the Population-Concept-Context (PCC) framework
+                </p>
+
+                <div class="pcc-framework" style="margin-bottom: var(--space-2xl);">
+                    <div class="pcc-item" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3);">
+                        <div class="pcc-item__label" style="color: rgba(255,255,255,0.8);">Population</div>
+                        <div class="pcc-item__value" style="color: white;">Adult ESL Learners</div>
+                    </div>
+                    <div class="pcc-item" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3);">
+                        <div class="pcc-item__label" style="color: rgba(255,255,255,0.8);">Concept</div>
+                        <div class="pcc-item__value" style="color: white;">Learning Theories</div>
+                    </div>
+                    <div class="pcc-item" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3);">
+                        <div class="pcc-item__label" style="color: rgba(255,255,255,0.8);">Context</div>
+                        <div class="pcc-item__value" style="color: white;">AI-Powered Practice</div>
+                    </div>
+                </div>
+
+                <div class="rq-grid">
+                    <div class="rq-card">
+                        <div class="rq-card__label">RQ1</div>
+                        <div class="rq-card__text">
+                            What learning theories (derived from empirical studies) support the design of AI-powered speaking practice systems for adult ESL learners?
+                        </div>
+                    </div>
+                    <div class="rq-card">
+                        <div class="rq-card__label">RQ2</div>
+                        <div class="rq-card__text">
+                            What instructional mechanisms (evidenced in empirical research) effectively improve speaking outcomes when implemented in AI-powered environments?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methods Section -->
+    <section class="section--alt" id="methods">
+        <div class="container">
+            <span class="section-label">Section 2</span>
+            <h2 class="section-title">Methods: PRISMA-ScR Approach</h2>
+            <p class="lead">
+                Scoping review with purposive, mechanism-rich sampling guided by PRISMA-ScR logic across six databases.
+            </p>
+
+            <!-- Database Pills -->
+            <div class="database-pills animate-on-scroll">
+                <div class="database-pill">
+                    <span class="database-pill__dot"></span>
+                    Scopus
+                </div>
+                <div class="database-pill">
+                    <span class="database-pill__dot" style="background: var(--color-accent);"></span>
+                    Web of Science
+                </div>
+                <div class="database-pill">
+                    <span class="database-pill__dot" style="background: var(--color-success);"></span>
+                    EBSCO
+                </div>
+                <div class="database-pill">
+                    <span class="database-pill__dot" style="background: var(--color-warning);"></span>
+                    JSTOR
+                </div>
+                <div class="database-pill">
+                    <span class="database-pill__dot" style="background: #9b59b6;"></span>
+                    ERIC
+                </div>
+                <div class="database-pill">
+                    <span class="database-pill__dot" style="background: #1abc9c;"></span>
+                    PsycInfo
+                </div>
+            </div>
+
+            <!-- PRISMA Flow -->
+            <div class="prisma-flow">
+                <div class="prisma-stage animate-on-scroll">
+                    <div class="prisma-stage__label">Identification</div>
+                    <div class="prisma-stage__content">
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">2,877</div>
+                            <div class="prisma-box__label">Records identified from databases</div>
+                        </div>
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">57</div>
+                            <div class="prisma-box__label">Distinct searches</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prisma-stage animate-on-scroll stagger-1">
+                    <div class="prisma-stage__label">Screening</div>
+                    <div class="prisma-stage__content">
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">1,426</div>
+                            <div class="prisma-box__label">After deduplication</div>
+                        </div>
+                        <div class="prisma-box prisma-box--excluded">
+                            <div class="prisma-box__number">-1,298</div>
+                            <div class="prisma-box__label">Not relevant to scope</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prisma-stage animate-on-scroll stagger-2">
+                    <div class="prisma-stage__label">Eligibility</div>
+                    <div class="prisma-stage__content">
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">128</div>
+                            <div class="prisma-box__label">Title/abstract screening</div>
+                        </div>
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">43</div>
+                            <div class="prisma-box__label">Full-text reviewed</div>
+                        </div>
+                        <div class="prisma-box prisma-box--excluded">
+                            <div class="prisma-box__number">-26</div>
+                            <div class="prisma-box__label">Insufficient mechanism detail</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prisma-stage animate-on-scroll stagger-3">
+                    <div class="prisma-stage__label">Included</div>
+                    <div class="prisma-stage__content">
+                        <div class="prisma-box prisma-box--final">
+                            <div class="prisma-box__number">17</div>
+                            <div class="prisma-box__label">Studies in final review</div>
+                        </div>
+                        <div class="prisma-box">
+                            <div class="prisma-box__number">47%</div>
+                            <div class="prisma-box__label">Published 2024-2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI-Human Triangulation -->
+            <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-top: var(--space-3xl);" class="animate-on-scroll">
+                <h3 style="margin-bottom: var(--space-lg);">Three-Layer AI-Human Triangulation Protocol</h3>
+                <p style="color: var(--color-text-light); margin-bottom: var(--space-xl);">
+                    The AI-assisted review process replaced a second human screener with multi-model LLM consensus plus targeted human adjudication.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg);">
+                    <div style="text-align: center; padding: var(--space-lg); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary); margin-bottom: var(--space-sm);">LAYER 1</div>
+                        <div style="font-weight: 600;">Multi-Model Screening</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light); margin-top: var(--space-sm);">GPT-5, Grok-4, Gemini 2.5 Pro</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-lg); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-accent); margin-bottom: var(--space-sm);">LAYER 2</div>
+                        <div style="font-weight: 600;">Cross-Validation</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light); margin-top: var(--space-sm);">Model consensus comparison</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-lg); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-success); margin-bottom: var(--space-sm);">LAYER 3</div>
+                        <div style="font-weight: 600;">Human Adjudication</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light); margin-top: var(--space-sm);">Final verification & synthesis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evidence Summary Section -->
+    <section id="evidence">
+        <div class="container">
+            <span class="section-label">Section 3</span>
+            <h2 class="section-title">Evidence Summary: 17 Studies</h2>
+            <p class="lead">
+                Primary evidence from included studies spanning practice scheduling, ASR feedback, LLM dialogue, and structured frameworks.
+            </p>
+
+            <!-- Cross-Study Insights -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); margin: var(--space-3xl) 0;">
+                <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); border-radius: var(--radius-xl); padding: var(--space-xl); color: white;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">INSIGHT 1</div>
+                    <h4 style="color: white; margin-bottom: var(--space-md);">Explicit Feedback Wins</h4>
+                    <p style="font-size: 0.95rem; opacity: 0.9;">Explicit cues or elicited self-repairs outperformed generic transcripts or immediate supply of answers.</p>
+                    <div style="margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7;">Ngo et al., 2024; Sun, 2023; Zargaran, 2025</div>
+                </div>
+
+                <div class="animate-on-scroll stagger-1" style="background: linear-gradient(135deg, var(--color-accent) 0%, #c0392b 100%); border-radius: var(--radius-xl); padding: var(--space-xl); color: white;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">INSIGHT 2</div>
+                    <h4 style="color: white; margin-bottom: var(--space-md);">Timing Matters</h4>
+                    <p style="font-size: 0.95rem; opacity: 0.9;">Dense scheduling accelerates procedural speech; interleaving supports transfer. Some metrics like silent pauses may not follow the same pattern.</p>
+                    <div style="margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7;">Li & DeKeyser, 2019; Suzuki, 2021; Zhang et al., 2023</div>
+                </div>
+
+                <div class="animate-on-scroll stagger-2" style="background: linear-gradient(135deg, var(--color-success) 0%, #1e8449 100%); border-radius: var(--radius-xl); padding: var(--space-xl); color: white;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">INSIGHT 3</div>
+                    <h4 style="color: white; margin-bottom: var(--space-md);">Social Mediation Amplifies</h4>
+                    <p style="font-size: 0.95rem; opacity: 0.9;">Peer collaboration or LLM partners added motivational and noticing advantages beyond solo AI loops.</p>
+                    <div style="margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7;">Evers & Chen, 2021; Zheng et al., 2025</div>
+                </div>
+
+                <div class="animate-on-scroll stagger-3" style="background: linear-gradient(135deg, var(--color-warning) 0%, #d68910 100%); border-radius: var(--radius-xl); padding: var(--space-xl); color: white;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">INSIGHT 4</div>
+                    <h4 style="color: white; margin-bottom: var(--space-md);">Structure Raises Quality</h4>
+                    <p style="font-size: 0.95rem; opacity: 0.9;">Lesson frameworks (BOPPPS, interleaved routines) improved discourse management, confidence, and adherence.</p>
+                    <div style="margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7;">Lai, 2025; Yang et al., 2025</div>
+                </div>
+            </div>
+
+            <!-- Geographic Distribution -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin: var(--space-3xl) 0;">
+                <h3 style="margin-bottom: var(--space-lg);">Geographic Distribution of Studies</h3>
+                <p style="color: var(--color-text-light); margin-bottom: var(--space-xl);">~2/3 of studies focused on East Asian university learners, highlighting a key limitation in generalizability.</p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-lg); justify-content: center;">
+                    <div style="text-align: center;">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md);">
+                            <span style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: white;">10</span>
+                        </div>
+                        <div style="font-weight: 600;">East Asia</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">China, Japan, Taiwan</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md);">
+                            <span style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: white;">3</span>
+                        </div>
+                        <div style="font-weight: 600;">Middle East</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">Saudi Arabia, Iran</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-success) 0%, #3cba92 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md);">
+                            <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: white;">2</span>
+                        </div>
+                        <div style="font-weight: 600;">North America</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">USA</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--color-warning) 0%, #d68910 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md);">
+                            <span style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: white;">1</span>
+                        </div>
+                        <div style="font-weight: 600;">Europe</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">Spain</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md);">
+                            <span style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: white;">1</span>
+                        </div>
+                        <div style="font-weight: 600;">Meta-analysis</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">Mixed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theoretical Foundations Section -->
+    <section class="section--alt" id="theories">
+        <div class="container">
+            <span class="section-label">Section 4</span>
+            <h2 class="section-title">Theoretical Foundations: 6 Learning Theories</h2>
+            <p class="lead">
+                "Theory" refers to a principled explanation of how knowledge is acquired, retained, and transferred in second-language speaking.
+            </p>
+
+            <!-- Theory Priority Visual -->
+            <div class="animate-on-scroll" style="display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center; margin: var(--space-2xl) 0;">
+                <div style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); background: var(--color-primary); color: white; border-radius: var(--radius-full); font-family: var(--font-mono); font-size: 0.75rem;">
+                    <span style="width: 10px; height: 10px; background: white; border-radius: 50%;"></span>
+                    HIGH PRIORITY
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); background: var(--color-accent); color: white; border-radius: var(--radius-full); font-family: var(--font-mono); font-size: 0.75rem;">
+                    <span style="width: 10px; height: 10px; background: white; border-radius: 50%;"></span>
+                    MEDIUM PRIORITY
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); background: var(--color-text-light); color: white; border-radius: var(--radius-full); font-family: var(--font-mono); font-size: 0.75rem;">
+                    <span style="width: 10px; height: 10px; background: white; border-radius: 50%;"></span>
+                    EMERGING
+                </div>
+            </div>
+
+            <!-- Theory Cards Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl);">
+
+                <!-- Theory 1: Skill Acquisition -->
+                <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 2px solid var(--color-primary); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 1 | HIGH PRIORITY</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">Skill Acquisition Theory</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Learning progresses through three stages: <strong>declarative</strong> (understanding rules) &rarr; <strong>procedural</strong> (practicing) &rarr; <strong>automatic</strong> (without conscious thought).
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Schedule high-volume, scaffolded practice with clear progression from accuracy to automaticity.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Li & DeKeyser, 2019; Suzuki, 2017, 2021; Suzuki et al., 2022
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory 2: Noticing Hypothesis -->
+                <div class="animate-on-scroll stagger-1" style="background: var(--color-bg-card); border: 2px solid var(--color-primary); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 2 | HIGH PRIORITY</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">The Noticing Hypothesis</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Learners must <strong>consciously notice</strong> a linguistic feature for it to become part of their acquisition process. Feedback draws attention to gaps.
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Surface precise pronunciation, grammar, and discourse gaps with prompts that elicit self-repair before showing models.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Tejedor-Garcia et al., 2020; Ngo et al., 2024; Zargaran, 2025
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory 3: Transfer-Appropriate Processing -->
+                <div class="animate-on-scroll stagger-2" style="background: var(--color-bg-card); border: 2px solid var(--color-primary); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 3 | HIGH PRIORITY</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">Transfer-Appropriate Processing</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Practice is most effective when it closely resembles the <strong>cognitive processes</strong> required by the target task.
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Simulate performance contexts (timed, impromptu, varied topics) and mix task types once stability is reached.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Suzuki, 2021; Zhang et al., 2023; Yang et al., 2025
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory 4: Usage-Based -->
+                <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 2px solid var(--color-accent); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-accent); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 4 | MEDIUM PRIORITY</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">Usage-Based / Constructionist</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Language is acquired by entrenching <strong>"constructions"</strong> (form-meaning pairings) through repeated use. Frequency strengthens memory traces.
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-accent); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Track and recycle signature phrases and sentence frames with user-facing dashboards.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Suzuki, Eguchi & de Jong, 2022
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory 5: Sociocultural -->
+                <div class="animate-on-scroll stagger-1" style="background: var(--color-bg-card); border: 2px solid var(--color-accent); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-accent); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 5 | MEDIUM PRIORITY</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">Sociocultural / Affective</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Learning occurs within the <strong>Zone of Proximal Development</strong> with a "More Knowledgeable Other." Safe interaction lowers anxiety and raises willingness to communicate.
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-accent); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Non-judgmental AI partners, clear goals, and supportive nudges before raising difficulty.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Zheng et al., 2025; Lai, 2025; Sun, 2023; Evers & Chen, 2021
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory 6: Retrieval Practice -->
+                <div class="animate-on-scroll stagger-2" style="background: var(--color-bg-card); border: 2px solid var(--color-text-light); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-text-light); color: white; padding: var(--space-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">THEORY 6 | EMERGING</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <h3 style="color: white; margin-top: var(--space-sm);">Retrieval Practice & Desirable Difficulties</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.95rem; color: var(--color-text-light); margin-bottom: var(--space-md);">
+                            Effortful, <strong>spaced retrieval</strong> stabilizes memory. Optimal Inter-Session Interval depends on Retention Interval and task complexity.
+                        </p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-light); margin-bottom: var(--space-xs);">DESIGN IMPLICATION</div>
+                            <p style="font-size: 0.85rem; margin: 0;">Manipulate practice schedules (spacing, interleaving) to create desirable difficulties, optimizing retention.</p>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+                            Li & DeKeyser, 2019; Suzuki, 2017; Suzuki & Hanzawa, 2022
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructional Mechanisms Section -->
+    <section id="mechanisms">
+        <div class="container">
+            <span class="section-label">Section 5</span>
+            <h2 class="section-title">Instructional Mechanisms: 10 Evidence-Based Strategies</h2>
+            <p class="lead">
+                These mechanisms represent the HOW&mdash;the specific instructional strategies and technologies that operationalize the theories.
+            </p>
+
+            <!-- Mechanism Categories -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); margin: var(--space-3xl) 0;">
+                <!-- Category 1: Practice & Scheduling -->
+                <div class="animate-on-scroll" style="grid-column: span 1;">
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-md); border-radius: var(--radius-lg) var(--radius-lg) 0 0; text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">CATEGORY 1</div>
+                        <h4 style="color: white; margin: var(--space-sm) 0 0;">Practice & Scheduling</h4>
+                    </div>
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: var(--space-lg);">
+                        <div style="margin-bottom: var(--space-lg);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                <span style="background: var(--color-primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">1</span>
+                                <strong>Adaptive Spacing</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-light); margin-left: 32px;">Tune ISI to retention goals; shorter ISI favors procedural performance.</p>
+                        </div>
+                        <div style="margin-bottom: var(--space-lg);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                <span style="background: var(--color-primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">2</span>
+                                <strong>Task Repetition Schedules</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-light); margin-left: 32px;">Blocked (AAA) for fluency, interleaved (ABC) for transfer.</p>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                <span style="background: var(--color-primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">3</span>
+                                <strong>Construction Reuse</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-light); margin-left: 32px;">Recycle constructions across prompts with gradual variation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: Feedback -->
+                <div class="animate-on-scroll stagger-1" style="grid-column: span 1;">
+                    <div style="background: var(--color-accent); color: white; padding: var(--space-md); border-radius: var(--radius-lg) var(--radius-lg) 0 0; text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">CATEGORY 2</div>
+                        <h4 style="color: white; margin: var(--space-sm) 0 0;">Feedback Mechanisms</h4>
+                    </div>
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: var(--space-lg);">
+                        <div style="margin-bottom: var(--space-lg);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                <span style="background: var(--color-accent); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">4</span>
+                                <strong>Explicit ASR Feedback</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-light); margin-left: 32px;">Immediate phoneme/stress highlights with clear exemplars. g=0.86 for explicit.</p>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                <span style="background: var(--color-accent); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">5</span>
+                                <strong>Pending/Elicited Feedback</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-light); margin-left: 32px;">Withhold answers to prompt self-repair, deepening processing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Scaffolding -->
+                <div class="animate-on-scroll stagger-2" style="grid-column: span 1;">
+                    <div style="background: var(--color-success); color: white; padding: var(--space-md); border-radius: var(--radius-lg) var(--radius-lg) 0 0; text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">CATEGORY 3</div>
+                        <h4 style="color: white; margin: var(--space-sm) 0 0;">Scaffolding & Support</h4>
+                    </div>
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: var(--space-lg);">
+                        <div style="margin-bottom: var(--space-md);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="background: var(--color-success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">6</span>
+                                <strong style="font-size: 0.9rem;">Partner Scaffolding</strong>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-left: 32px;">ASR+Peer or LLM partner</p>
+                        </div>
+                        <div style="margin-bottom: var(--space-md);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="background: var(--color-success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">7</span>
+                                <strong style="font-size: 0.9rem;">Structured Orchestration</strong>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-left: 32px;">BOPPPS framework</p>
+                        </div>
+                        <div style="margin-bottom: var(--space-md);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="background: var(--color-success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">8</span>
+                                <strong style="font-size: 0.9rem;">Mobile Micro-Practice</strong>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-left: 32px;">Short, frequent sessions</p>
+                        </div>
+                        <div style="margin-bottom: var(--space-md);">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="background: var(--color-success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem;">9</span>
+                                <strong style="font-size: 0.9rem;">Graduated Difficulty</strong>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-left: 32px;">Mastery gates + fallbacks</p>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="background: var(--color-success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.65rem;">10</span>
+                                <strong style="font-size: 0.9rem;">Confidence Nudges</strong>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-left: 32px;">Self-assessments & reflection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Schedule Progression Visual -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-top: var(--space-3xl);">
+                <h3 style="text-align: center; margin-bottom: var(--space-xl);">Practice Schedule Progression: Blocked &rarr; Interleaved &rarr; Spaced</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl);">
+                    <!-- Phase 1: Blocked -->
+                    <div style="text-align: center;">
+                        <div style="background: var(--color-warning); color: white; padding: var(--space-md); border-radius: var(--radius-lg); margin-bottom: var(--space-lg);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">PHASE 1</div>
+                            <div style="font-weight: 600;">Blocked Practice</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">AAA / BBB / CCC</div>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 4px; margin-bottom: var(--space-md);">
+                            <span style="width: 30px; height: 30px; background: #e74c3c; border-radius: 4px;"></span>
+                            <span style="width: 30px; height: 30px; background: #e74c3c; border-radius: 4px;"></span>
+                            <span style="width: 30px; height: 30px; background: #e74c3c; border-radius: 4px;"></span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">
+                            <div>+15-20% articulation rate</div>
+                            <div>Reduced mid-clause pauses</div>
+                            <div style="color: var(--color-accent);">Limited transfer</div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2: Interleaved -->
+                    <div style="text-align: center;">
+                        <div style="background: var(--color-success); color: white; padding: var(--space-md); border-radius: var(--radius-lg); margin-bottom: var(--space-lg);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">PHASE 2</div>
+                            <div style="font-weight: 600;">Interleaved Practice</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">ABC / ABC / ABC</div>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 4px; margin-bottom: var(--space-md);">
+                            <span style="width: 30px; height: 30px; background: #e74c3c; border-radius: 4px;"></span>
+                            <span style="width: 30px; height: 30px; background: #3498db; border-radius: 4px;"></span>
+                            <span style="width: 30px; height: 30px; background: #2ecc71; border-radius: 4px;"></span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">
+                            <div>Enhanced transfer to novel tasks</div>
+                            <div>Flexible retrieval patterns</div>
+                            <div style="color: var(--color-warning);">Higher cognitive effort</div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3: Spaced -->
+                    <div style="text-align: center;">
+                        <div style="background: var(--color-primary); color: white; padding: var(--space-md); border-radius: var(--radius-lg); margin-bottom: var(--space-lg);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">PHASE 3</div>
+                            <div style="font-weight: 600;">Spaced Repetition</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">Optimized ISI based on RI</div>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: var(--space-md);">
+                            <span style="width: 30px; height: 30px; background: #9b59b6; border-radius: 4px;"></span>
+                            <span style="width: 12px;"></span>
+                            <span style="width: 30px; height: 30px; background: #9b59b6; border-radius: 4px; opacity: 0.7;"></span>
+                            <span style="width: 24px;"></span>
+                            <span style="width: 30px; height: 30px; background: #9b59b6; border-radius: 4px; opacity: 0.5;"></span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-light);">
+                            <div>Optimal long-term retention</div>
+                            <div>1-4 day ISI for procedural</div>
+                            <div>Prevents forgetting & interference</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-xl); font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted);">
+                    Evidence: Suzuki (2021); Li & DeKeyser (2019); Zhang et al. (2023); Suzuki & Hanzawa (2022)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theory-Mechanism Relationships Section -->
+    <section id="relationships" style="background: var(--color-bg);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Theory-Mechanism Relationships</h2>
+            <p class="section-subtitle animate-on-scroll">Mapping theoretical foundations to instructional mechanisms and design outcomes</p>
+
+            <!-- Interactive Connection Matrix -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl); overflow-x: auto;">
+                <h3 style="text-align: center; margin-bottom: var(--space-xl);">Theory → Mechanism Connection Matrix</h3>
+
+                <div style="display: grid; grid-template-columns: 180px repeat(6, 1fr); gap: 2px; font-size: 0.75rem;">
+                    <!-- Header Row -->
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); font-weight: 600; border-radius: var(--radius-sm) 0 0 0;">Mechanism</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600;">ACT-R</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600;">Usage-Based</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600;">SCT</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600;">Interactionist</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600;">Self-Efficacy</div>
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-sm); text-align: center; font-weight: 600; border-radius: 0 var(--radius-sm) 0 0;">Desirable Diff.</div>
+
+                    <!-- Row: Blocked→Interleaved→Spaced -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); font-weight: 500;">Blocked→Interleaved→Spaced</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+
+                    <!-- Row: High-Variability Input -->
+                    <div style="background: var(--color-bg); padding: var(--space-sm); font-weight: 500;">High-Variability Input</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+
+                    <!-- Row: Construction Recycling -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); font-weight: 500;">Construction Recycling</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+
+                    <!-- Row: Explicit ASR Feedback -->
+                    <div style="background: var(--color-bg); padding: var(--space-sm); font-weight: 500;">Explicit ASR Feedback</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+
+                    <!-- Row: Pending/Elicited Feedback -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); font-weight: 500;">Pending/Elicited Feedback</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+
+                    <!-- Row: Partner Scaffolding -->
+                    <div style="background: var(--color-bg); padding: var(--space-sm); font-weight: 500;">Partner Scaffolding</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+
+                    <!-- Row: Structured Orchestration -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); font-weight: 500;">Structured Orchestration</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+
+                    <!-- Row: Mobile Micro-Practice -->
+                    <div style="background: var(--color-bg); padding: var(--space-sm); font-weight: 500;">Mobile Micro-Practice</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+
+                    <!-- Row: Graduated Difficulty -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); font-weight: 500;">Graduated Difficulty</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-sm); text-align: center;">●●</div>
+                    <div style="background: var(--color-bg-alt); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+
+                    <!-- Row: Confidence Nudges -->
+                    <div style="background: var(--color-bg); padding: var(--space-sm); font-weight: 500; border-radius: 0 0 0 var(--radius-sm);">Confidence Nudges</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted);">○</div>
+                    <div style="background: var(--color-success); color: white; padding: var(--space-sm); text-align: center;">●●●</div>
+                    <div style="background: var(--color-bg); padding: var(--space-sm); text-align: center; color: var(--color-text-muted); border-radius: 0 0 var(--radius-sm) 0;">○</div>
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: var(--space-xl); margin-top: var(--space-lg); font-size: 0.8rem;">
+                    <div style="display: flex; align-items: center; gap: var(--space-xs);"><span style="width: 16px; height: 16px; background: var(--color-success); border-radius: 2px;"></span> Primary (●●●)</div>
+                    <div style="display: flex; align-items: center; gap: var(--space-xs);"><span style="width: 16px; height: 16px; background: var(--color-warning); border-radius: 2px;"></span> Secondary (●●)</div>
+                    <div style="display: flex; align-items: center; gap: var(--space-xs);"><span style="width: 16px; height: 16px; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 2px;"></span> Not Connected (○)</div>
+                </div>
+            </div>
+
+            <!-- Theory-Mechanism-Design-Outcome Flow (Figure 2) -->
+            <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+                <h3 style="text-align: center; color: white; margin-bottom: var(--space-xl);">Theory → Mechanism → Design → Outcome Flow</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); position: relative;">
+                    <!-- Theories Column -->
+                    <div>
+                        <div style="background: rgba(255,255,255,0.2); padding: var(--space-md); border-radius: var(--radius-lg); text-align: center; margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">LAYER 1</div>
+                            <div style="font-weight: 700; font-size: 1.1rem;">Theories</div>
+                        </div>
+                        <div style="font-size: 0.85rem; space-y: var(--space-sm);">
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">ACT-R / Skill Acquisition</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Usage-Based Theory</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Sociocultural Theory</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Interactionist Hypothesis</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Self-Efficacy Theory</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md);">Desirable Difficulties</div>
+                        </div>
+                    </div>
+
+                    <!-- Mechanisms Column -->
+                    <div>
+                        <div style="background: rgba(255,255,255,0.2); padding: var(--space-md); border-radius: var(--radius-lg); text-align: center; margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">LAYER 2</div>
+                            <div style="font-weight: 700; font-size: 1.1rem;">Mechanisms</div>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Practice Scheduling</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Input Variability</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Feedback Types</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Scaffolding Support</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md);">Difficulty Progression</div>
+                        </div>
+                    </div>
+
+                    <!-- Design Features Column -->
+                    <div>
+                        <div style="background: rgba(255,255,255,0.2); padding: var(--space-md); border-radius: var(--radius-lg); text-align: center; margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">LAYER 3</div>
+                            <div style="font-weight: 700; font-size: 1.1rem;">Design Features</div>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">ASR Engine Integration</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">LLM Partner Agent</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Tri-Modal Feedback</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">BOPPPS Structure</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: var(--space-sm); border-radius: var(--radius-md);">Progress Dashboard</div>
+                        </div>
+                    </div>
+
+                    <!-- Outcomes Column -->
+                    <div>
+                        <div style="background: var(--color-accent); padding: var(--space-md); border-radius: var(--radius-lg); text-align: center; margin-bottom: var(--space-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.8;">LAYER 4</div>
+                            <div style="font-weight: 700; font-size: 1.1rem;">Outcomes</div>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <div style="background: rgba(255,255,255,0.15); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Pronunciation Accuracy</div>
+                            <div style="background: rgba(255,255,255,0.15); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Speech Fluency</div>
+                            <div style="background: rgba(255,255,255,0.15); padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">Speaking Confidence</div>
+                            <div style="background: rgba(255,255,255,0.15); padding: var(--space-sm); border-radius: var(--radius-md);">Long-term Retention</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flow Arrows -->
+                <div style="display: flex; justify-content: space-around; margin-top: var(--space-lg);">
+                    <div style="text-align: center; font-size: 1.5rem; opacity: 0.6;">→</div>
+                    <div style="text-align: center; font-size: 1.5rem; opacity: 0.6;">→</div>
+                    <div style="text-align: center; font-size: 1.5rem; opacity: 0.6;">→</div>
+                </div>
+            </div>
+
+            <!-- Notable Integration Points -->
+            <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg);">
+                <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-success); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                    <h4 style="color: var(--color-success); margin-bottom: var(--space-sm);">High-Synergy Integration</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-sm);"><strong>ACT-R + Desirable Difficulties</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">Blocked→Interleaved→Spaced practice sequence optimizes both proceduralization and long-term retention. Mobile micro-practice enables distributed practice.</p>
+                </div>
+
+                <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-primary); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-sm);">Complementary Alignment</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-sm);"><strong>SCT + Interactionist</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">Partner scaffolding combines ZPD-appropriate support with negotiated meaning. LLM agents can provide both scaffolding and corrective feedback.</p>
+                </div>
+
+                <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-accent); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                    <h4 style="color: var(--color-accent); margin-bottom: var(--space-sm);">Emerging Connection</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-sm);"><strong>Self-Efficacy + Graduated Difficulty</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">Mastery experiences build confidence when combined with appropriate challenge levels. Confidence nudges reinforce perceived capability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings Section -->
+    <section id="findings" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Findings</h2>
+            <p class="section-subtitle animate-on-scroll">Four major findings synthesized from 17 empirical studies</p>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl);">
+                <!-- Finding 1 -->
+                <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: var(--space-md); right: var(--space-md); font-family: var(--font-mono); font-size: 3rem; opacity: 0.15; font-weight: 700;">01</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">FINDING ONE</div>
+                    <h3 style="color: white; font-size: 1.4rem; margin-bottom: var(--space-md);">Practice Scheduling Matters</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.95; margin-bottom: var(--space-lg);">The Blocked → Interleaved → Spaced progression optimizes both initial skill acquisition and long-term retention of speaking skills.</p>
+                    <div style="background: rgba(255,255,255,0.15); padding: var(--space-md); border-radius: var(--radius-lg);">
+                        <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: var(--space-xs);">Evidence</div>
+                        <div style="font-size: 0.85rem;">g = 0.52-0.86 fluency gains; 15-20% articulation rate improvement</div>
+                    </div>
+                </div>
+
+                <!-- Finding 2 -->
+                <div class="animate-on-scroll stagger-1" style="background: linear-gradient(135deg, var(--color-accent) 0%, #d45a41 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: var(--space-md); right: var(--space-md); font-family: var(--font-mono); font-size: 3rem; opacity: 0.15; font-weight: 700;">02</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">FINDING TWO</div>
+                    <h3 style="color: white; font-size: 1.4rem; margin-bottom: var(--space-md);">Explicit Feedback Dominates</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.95; margin-bottom: var(--space-lg);">Explicit ASR feedback with phoneme-level highlights produces stronger effect sizes than implicit recasts.</p>
+                    <div style="background: rgba(255,255,255,0.15); padding: var(--space-md); border-radius: var(--radius-lg);">
+                        <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: var(--space-xs);">Evidence</div>
+                        <div style="font-size: 0.85rem;">g = 0.86 explicit vs. g = 0.55 implicit; 4× larger than general CALL</div>
+                    </div>
+                </div>
+
+                <!-- Finding 3 -->
+                <div class="animate-on-scroll stagger-2" style="background: linear-gradient(135deg, var(--color-success) 0%, #1e8449 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: var(--space-md); right: var(--space-md); font-family: var(--font-mono); font-size: 3rem; opacity: 0.15; font-weight: 700;">03</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">FINDING THREE</div>
+                    <h3 style="color: white; font-size: 1.4rem; margin-bottom: var(--space-md);">Scaffolding Enables Autonomy</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.95; margin-bottom: var(--space-lg);">AI partners operating within learner ZPD improve both linguistic outcomes and speaking confidence.</p>
+                    <div style="background: rgba(255,255,255,0.15); padding: var(--space-md); border-radius: var(--radius-lg);">
+                        <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: var(--space-xs);">Evidence</div>
+                        <div style="font-size: 0.85rem;">r = 0.36-0.50 confidence-performance correlation; ASR+Peer outperforms solo</div>
+                    </div>
+                </div>
+
+                <!-- Finding 4 -->
+                <div class="animate-on-scroll stagger-3" style="background: linear-gradient(135deg, var(--color-warning) 0%, #c0392b 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: var(--space-md); right: var(--space-md); font-family: var(--font-mono); font-size: 3rem; opacity: 0.15; font-weight: 700;">04</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">FINDING FOUR</div>
+                    <h3 style="color: white; font-size: 1.4rem; margin-bottom: var(--space-md);">Construction Grammar Works</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.95; margin-bottom: var(--space-lg);">High-variability input and construction recycling build robust phonological and syntactic categories for transfer.</p>
+                    <div style="background: rgba(255,255,255,0.15); padding: var(--space-md); border-radius: var(--radius-lg);">
+                        <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: var(--space-xs);">Evidence</div>
+                        <div style="font-size: 0.85rem;">Enhanced generalization to novel contexts; d = 1.40+ vocabulary retention</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Applications Section -->
+    <section id="applications" style="background: var(--color-bg);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Design Applications</h2>
+            <p class="section-subtitle animate-on-scroll">Four evidence-based recommendations for AI-powered ESL speaking system design</p>
+
+            <!-- 4 Application Cards with KPIs -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); margin-bottom: var(--space-3xl);">
+                <!-- Application 1 -->
+                <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-primary); color: white; padding: var(--space-lg); text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; margin-bottom: var(--space-xs);">01</div>
+                        <h3 style="color: white; font-size: 1.1rem; margin: 0;">Adaptive Practice Scheduler</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-md);">Implement blocked → interleaved → spaced progression based on learner mastery metrics.</p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">TARGET KPIs</div>
+                            <div style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600;">+15-20% articulation rate</div>
+                            <div style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600;">g = 0.52-0.86 fluency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application 2 -->
+                <div class="animate-on-scroll stagger-1" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-accent); color: white; padding: var(--space-lg); text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; margin-bottom: var(--space-xs);">02</div>
+                        <h3 style="color: white; font-size: 1.1rem; margin: 0;">Tri-Modal Feedback Engine</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-md);">Combine ASR scores, waveform visualizations, and LLM-generated corrective prompts.</p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">TARGET KPIs</div>
+                            <div style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600;">g = 0.86 explicit feedback</div>
+                            <div style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600;">4× CALL effect size</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application 3 -->
+                <div class="animate-on-scroll stagger-2" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-success); color: white; padding: var(--space-lg); text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; margin-bottom: var(--space-xs);">03</div>
+                        <h3 style="color: white; font-size: 1.1rem; margin: 0;">BOPPPS Micro-Lesson Engine</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-md);">Structure each session with Bridge, Objective, Pre-test, Participatory, Post-test, Summary phases.</p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">TARGET KPIs</div>
+                            <div style="font-size: 0.85rem; color: var(--color-success); font-weight: 600;">Structured scaffolding</div>
+                            <div style="font-size: 0.85rem; color: var(--color-success); font-weight: 600;">ZPD-aligned progression</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application 4 -->
+                <div class="animate-on-scroll stagger-3" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden;">
+                    <div style="background: var(--color-warning); color: white; padding: var(--space-lg); text-align: center;">
+                        <div style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; margin-bottom: var(--space-xs);">04</div>
+                        <h3 style="color: white; font-size: 1.1rem; margin: 0;">Construction Tracker</h3>
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: var(--space-md);">Log constructions used across prompts and visualize frequency/accuracy over time.</p>
+                        <div style="background: var(--color-bg-alt); padding: var(--space-md); border-radius: var(--radius-md);">
+                            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">TARGET KPIs</div>
+                            <div style="font-size: 0.85rem; color: var(--color-warning); font-weight: 600;">d = 1.40+ retention</div>
+                            <div style="font-size: 0.85rem; color: var(--color-warning); font-weight: 600;">Transfer to novel contexts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tri-Modal Feedback Loop Diagram (Figure 3) -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+                <h3 style="text-align: center; margin-bottom: var(--space-xl);">Tri-Modal Feedback Loop</h3>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-xl);">
+                    <!-- Central learner -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-3xl); flex-wrap: wrap;">
+                        <!-- ASR Score -->
+                        <div style="text-align: center;">
+                            <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; margin: 0 auto var(--space-md);">
+                                <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700;">ASR</div>
+                                <div style="font-size: 0.7rem; opacity: 0.8;">Score</div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--color-text-light); max-width: 140px;">
+                                Phoneme accuracy<br>Stress patterns<br>Fluency metrics
+                            </div>
+                        </div>
+
+                        <!-- Arrow to Learner -->
+                        <div style="font-size: 2rem; color: var(--color-primary);">→</div>
+
+                        <!-- Learner Center -->
+                        <div style="text-align: center;">
+                            <div style="width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent) 0%, #d45a41 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; margin: 0 auto var(--space-md); box-shadow: 0 8px 32px rgba(231, 111, 81, 0.3);">
+                                <div style="font-size: 2rem;">🎙️</div>
+                                <div style="font-weight: 600;">Learner</div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--color-text-light);">Speaking Attempt</div>
+                        </div>
+
+                        <!-- Arrow from Learner -->
+                        <div style="font-size: 2rem; color: var(--color-success);">→</div>
+
+                        <!-- Waveform -->
+                        <div style="text-align: center;">
+                            <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-success) 0%, #1e8449 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; margin: 0 auto var(--space-md);">
+                                <div style="font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700;">Wave</div>
+                                <div style="font-size: 0.7rem; opacity: 0.8;">Visual</div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--color-text-light); max-width: 140px;">
+                                Pitch contours<br>Timing display<br>Gap analysis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LLM Feedback Row -->
+                    <div style="display: flex; align-items: center; gap: var(--space-lg);">
+                        <div style="font-size: 2rem; color: var(--color-warning);">↓</div>
+                        <div style="background: linear-gradient(135deg, var(--color-warning) 0%, #c0392b 100%); color: white; padding: var(--space-lg) var(--space-2xl); border-radius: var(--radius-xl); text-align: center;">
+                            <div style="font-weight: 600; margin-bottom: var(--space-xs);">LLM Corrective Prompt</div>
+                            <div style="font-size: 0.85rem; opacity: 0.9;">"Try emphasizing the second syllable: re-SEARCH"</div>
+                        </div>
+                        <div style="font-size: 2rem; color: var(--color-warning);">↓</div>
+                    </div>
+
+                    <!-- Feedback Loop Arrow -->
+                    <div style="display: flex; align-items: center; gap: var(--space-md); color: var(--color-text-muted);">
+                        <span style="font-size: 1.5rem;">↻</span>
+                        <span style="font-size: 0.9rem;">Iterative Refinement Cycle</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-xl); font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted);">
+                    Figure 3: Tri-Modal Feedback integrates numeric scores, visual representations, and natural language guidance
+                </div>
+            </div>
+
+            <!-- BOPPPS Cycle Diagram (Figure 4) -->
+            <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-bg-alt) 0%, #f0ebe3 100%); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+                <h3 style="text-align: center; margin-bottom: var(--space-xl);">BOPPPS Micro-Lesson Framework</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-sm);">
+                    <!-- B -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">B</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Bridge</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Hook attention with relevant context</div>
+                    </div>
+                    <!-- O -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">O</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Objective</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Clear learning goals stated</div>
+                    </div>
+                    <!-- P1 -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-success); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">P</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Pre-test</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Assess prior knowledge</div>
+                    </div>
+                    <!-- P2 -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-warning); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">P</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Participatory</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Active practice with feedback</div>
+                    </div>
+                    <!-- P3 -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: #9b59b6; color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">P</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Post-test</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Verify learning gains</div>
+                    </div>
+                    <!-- S -->
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: #34495e; color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; margin: 0 auto var(--space-sm);">S</div>
+                        <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-xs);">Summary</div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-light);">Consolidate & preview next</div>
+                    </div>
+                </div>
+
+                <!-- Progress arrow -->
+                <div style="display: flex; justify-content: center; margin: var(--space-lg) 0;">
+                    <div style="background: var(--color-border); height: 4px; width: 80%; border-radius: 2px; position: relative;">
+                        <div style="position: absolute; right: 0; top: -6px; font-size: 1rem; color: var(--color-text-muted);">→</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted);">
+                    Figure 4: Each micro-lesson follows the BOPPPS structure for scaffolded instruction
+                </div>
+            </div>
+
+            <!-- Construction Tracking Dashboard Mockup -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl);">
+                <h3 style="text-align: center; margin-bottom: var(--space-xl);">Construction Tracking Dashboard</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
+                    <!-- Usage Frequency -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-lg); border-radius: var(--radius-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">CONSTRUCTION FREQUENCY</div>
+                        <div style="space-y: var(--space-sm);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                                <span style="font-size: 0.85rem;">"I would like to..."</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-success);">47×</span>
+                            </div>
+                            <div style="background: var(--color-bg); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--color-success); height: 100%; width: 94%;"></div>
+                            </div>
+                        </div>
+                        <div style="space-y: var(--space-sm); margin-top: var(--space-md);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                                <span style="font-size: 0.85rem;">"Could you please..."</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary);">32×</span>
+                            </div>
+                            <div style="background: var(--color-bg); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--color-primary); height: 100%; width: 68%;"></div>
+                            </div>
+                        </div>
+                        <div style="space-y: var(--space-sm); margin-top: var(--space-md);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                                <span style="font-size: 0.85rem;">"What do you think..."</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-warning);">18×</span>
+                            </div>
+                            <div style="background: var(--color-bg); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--color-warning); height: 100%; width: 38%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accuracy Over Time -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-lg); border-radius: var(--radius-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">ACCURACY TREND</div>
+                        <div style="display: flex; align-items: flex-end; gap: 8px; height: 100px;">
+                            <div style="flex: 1; background: var(--color-primary); height: 40%; border-radius: 4px 4px 0 0; opacity: 0.6;"></div>
+                            <div style="flex: 1; background: var(--color-primary); height: 50%; border-radius: 4px 4px 0 0; opacity: 0.7;"></div>
+                            <div style="flex: 1; background: var(--color-primary); height: 55%; border-radius: 4px 4px 0 0; opacity: 0.75;"></div>
+                            <div style="flex: 1; background: var(--color-primary); height: 70%; border-radius: 4px 4px 0 0; opacity: 0.8;"></div>
+                            <div style="flex: 1; background: var(--color-primary); height: 75%; border-radius: 4px 4px 0 0; opacity: 0.85;"></div>
+                            <div style="flex: 1; background: var(--color-primary); height: 85%; border-radius: 4px 4px 0 0; opacity: 0.9;"></div>
+                            <div style="flex: 1; background: var(--color-success); height: 92%; border-radius: 4px 4px 0 0;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: var(--space-sm); font-size: 0.7rem; color: var(--color-text-muted);">
+                            <span>Week 1</span>
+                            <span>Week 7</span>
+                        </div>
+                    </div>
+
+                    <!-- Mastery Status -->
+                    <div style="background: var(--color-bg-alt); padding: var(--space-lg); border-radius: var(--radius-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">MASTERY STATUS</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+                            <span style="background: var(--color-success); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Requests ✓</span>
+                            <span style="background: var(--color-success); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Opinions ✓</span>
+                            <span style="background: var(--color-primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Questions ~</span>
+                            <span style="background: var(--color-warning); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Conditionals</span>
+                            <span style="background: var(--color-bg); color: var(--color-text-muted); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--color-border);">Subjunctive</span>
+                        </div>
+                        <div style="margin-top: var(--space-md); font-size: 0.8rem; color: var(--color-text-light);">
+                            <span style="color: var(--color-success);">●</span> Mastered &nbsp;
+                            <span style="color: var(--color-primary);">●</span> Progressing &nbsp;
+                            <span style="color: var(--color-warning);">●</span> Learning &nbsp;
+                            <span style="color: var(--color-text-muted);">○</span> Not Started
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discussion Section -->
+    <section id="discussion" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Discussion</h2>
+            <p class="section-subtitle animate-on-scroll">Implications, limitations, and future directions</p>
+
+            <!-- Evidence Summary -->
+            <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+                <h3 style="color: white; text-align: center; margin-bottom: var(--space-xl);">Evidence Summary</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-xl); text-align: center;">
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700;">17</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Empirical Studies</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700;">6</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Foundational Theories</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700;">10</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Instructional Mechanisms</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700;">4</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Design Applications</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limitations -->
+            <div class="animate-on-scroll" style="margin-bottom: var(--space-2xl);">
+                <h3 style="margin-bottom: var(--space-lg);">Limitations</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
+                    <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-warning); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                        <h4 style="color: var(--color-warning); margin-bottom: var(--space-sm);">Geographic Bias</h4>
+                        <p style="font-size: 0.9rem; color: var(--color-text-light);">Majority of studies from East Asia (Japan, China, Taiwan). Findings may not generalize to all L1 backgrounds.</p>
+                    </div>
+                    <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-accent); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                        <h4 style="color: var(--color-accent); margin-bottom: var(--space-sm);">Duration Constraints</h4>
+                        <p style="font-size: 0.9rem; color: var(--color-text-light);">Most interventions 4-12 weeks. Long-term retention data beyond 1 year remains limited.</p>
+                    </div>
+                    <div style="background: var(--color-bg-card); border-left: 4px solid var(--color-primary); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                        <h4 style="color: var(--color-primary); margin-bottom: var(--space-sm);">Technology Gap</h4>
+                        <p style="font-size: 0.9rem; color: var(--color-text-light);">No empirical studies yet with GPT-4 class LLMs for speaking practice. Theoretical extrapolation required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Research Directions -->
+            <div class="animate-on-scroll" style="margin-bottom: var(--space-2xl);">
+                <h3 style="margin-bottom: var(--space-lg);">Future Research Directions</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary); margin-bottom: var(--space-sm);">PRIORITY 1</div>
+                        <h4 style="margin-bottom: var(--space-sm);">LLM Partner Empirics</h4>
+                        <p style="font-size: 0.85rem; color: var(--color-text-light);">RCTs comparing human tutors vs. LLM conversation partners for speaking outcomes.</p>
+                    </div>
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-accent); margin-bottom: var(--space-sm);">PRIORITY 2</div>
+                        <h4 style="margin-bottom: var(--space-sm);">Adaptive Algorithms</h4>
+                        <p style="font-size: 0.85rem; color: var(--color-text-light);">Optimal ISI scheduling algorithms for speaking skill proceduralization.</p>
+                    </div>
+                    <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-success); margin-bottom: var(--space-sm);">PRIORITY 3</div>
+                        <h4 style="margin-bottom: var(--space-sm);">Cross-Cultural Validation</h4>
+                        <p style="font-size: 0.85rem; color: var(--color-text-light);">Replication studies across diverse L1 backgrounds and cultural contexts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethical Considerations -->
+            <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 2px solid var(--color-warning); border-radius: var(--radius-xl); padding: var(--space-xl);">
+                <h3 style="color: var(--color-warning); margin-bottom: var(--space-md);">⚠️ Ethical Considerations</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); font-size: 0.9rem; color: var(--color-text-light);">
+                    <div><strong>Data Privacy:</strong> Voice recordings require informed consent and secure storage.</div>
+                    <div><strong>AI Transparency:</strong> Learners should know when interacting with AI vs. humans.</div>
+                    <div><strong>Bias Mitigation:</strong> ASR systems may disadvantage certain accents; continuous monitoring needed.</div>
+                    <div><strong>Dependency Risk:</strong> Systems should build learner autonomy, not reliance.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion" style="background: var(--color-bg);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Conclusion</h2>
+
+            <div class="animate-on-scroll" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.15rem; line-height: 1.8; color: var(--color-text); margin-bottom: var(--space-xl);">
+                    This scoping review synthesizes <strong>six foundational theories</strong> and <strong>ten instructional mechanisms</strong> into an actionable framework for AI-powered ESL speaking system design. The evidence supports a <strong>Blocked → Interleaved → Spaced</strong> practice progression, <strong>explicit tri-modal feedback</strong>, and <strong>scaffolded partner interactions</strong> as high-priority design features.
+                </p>
+
+                <div style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-xl);">
+                    <h3 style="color: white; margin-bottom: var(--space-md);">Key Takeaway</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.95;">
+                        Theory-grounded design transforms AI-ESL systems from simple drill tools into sophisticated learning environments that proceduralize speaking skills, build robust phonological categories, and foster learner confidence.
+                    </p>
+                </div>
+
+                <p style="font-size: 1rem; color: var(--color-text-light); line-height: 1.7;">
+                    As LLM capabilities advance, the theoretical foundations and empirical mechanisms identified here provide a principled roadmap for developing next-generation speaking practice systems that genuinely support second language acquisition.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="references" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key References</h2>
+            <p class="section-subtitle animate-on-scroll">Selected citations from the 17 empirical studies reviewed</p>
+
+            <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-lg); font-size: 0.85rem;">
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-primary);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Anderson, J. R. (2015). <em>Cognitive Psychology and Its Implications</em> (8th ed.). Worth Publishers.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-accent);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Bandura, A. (1997). <em>Self-Efficacy: The Exercise of Control</em>. W.H. Freeman.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-success);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Björk, R. A., & Björk, E. L. (2020). Desirable difficulties in theory and practice. <em>Journal of Applied Research in Memory and Cognition</em>, 9(4), 475-479.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-warning);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Golonka, E. M., et al. (2014). Technologies for foreign language learning: A review. <em>Computer Assisted Language Learning</em>, 27(1), 70-105.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid #9b59b6;">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Li, S., & DeKeyser, R. M. (2019). Implicit and explicit instruction. In J. W. Schwieter & A. Benati (Eds.), <em>The Cambridge Handbook of Language Learning</em>. Cambridge University Press.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid #34495e;">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Suzuki, Y. (2021). Optimizing fluency training for speaking skills transfer. <em>Studies in Second Language Acquisition</em>, 43(5), 1037-1061.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-primary);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Tomasello, M. (2003). <em>Constructing a Language: A Usage-Based Theory of Language Acquisition</em>. Harvard University Press.</p>
+                </div>
+                <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-accent);">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">Vygotsky, L. S. (1978). <em>Mind in Society: The Development of Higher Psychological Processes</em>. Harvard University Press.</p>
+                </div>
+            </div>
+
+            <div class="animate-on-scroll" style="text-align: center; margin-top: var(--space-xl);">
+                <p style="font-size: 0.9rem; color: var(--color-text-muted);">For the complete reference list, please see the full PDF document.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-primary); color: white; padding: var(--space-3xl) 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-2xl); margin-bottom: var(--space-2xl);">
+                <!-- Author Info -->
+                <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
+                        <img src="https://pbs.twimg.com/profile_images/1926465242164289538/XdrQhdiw_400x400.jpg" alt="Joe Hu" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3);">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1.1rem;">Joe (Beiqiao) Hu</div>
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Researcher & Designer</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; opacity: 0.9; line-height: 1.6;">Bridging learning science and AI technology for effective language education.</p>
+                </div>
+
+                <!-- Contact Links -->
+                <div>
+                    <h4 style="color: white; margin-bottom: var(--space-md); font-size: 0.9rem; letter-spacing: 0.05em;">CONNECT</h4>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                        <a href="https://hubeiqiao.com" target="_blank" style="color: white; opacity: 0.9; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: var(--space-sm);">
+                            🌐 hubeiqiao.com
+                        </a>
+                        <a href="https://twitter.com/hubeiqiao" target="_blank" style="color: white; opacity: 0.9; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: var(--space-sm);">
+                            𝕏 @hubeiqiao
+                        </a>
+                        <a href="https://linkedin.com/in/hubeiqiao" target="_blank" style="color: white; opacity: 0.9; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: var(--space-sm);">
+                            💼 LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Download -->
+                <div>
+                    <h4 style="color: white; margin-bottom: var(--space-md); font-size: 0.9rem; letter-spacing: 0.05em;">RESOURCES</h4>
+                    <a href="Mechanisms_and_Foundational_Theories_for_AI-ESL_Speaking_System_20251201_V6.pdf" download style="display: inline-flex; align-items: center; gap: var(--space-sm); background: rgba(255,255,255,0.15); color: white; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-md); text-decoration: none; font-size: 0.9rem; transition: background 0.2s ease;">
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: var(--space-lg); text-align: center;">
+                <p style="font-size: 0.8rem; opacity: 0.7;">
+                    © 2025 <a href="https://hubeiqiao.com" target="_blank" style="color: white; text-decoration: underline;">Joe (Beiqiao) Hu</a>. Theories and Mechanisms for AI-Powered ESL Speaking System Design.
+                </p>
+                <p style="font-size: 0.75rem; opacity: 0.5; margin-top: var(--space-sm);">
+                    Built with Claude Code with Opus 4.5
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for animations and interactions -->
+    <script>
+        // Navigation visibility on scroll
+        const nav = document.getElementById('nav');
+        const progress = document.getElementById('progress');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            // Show nav after scrolling past hero
+            if (currentScroll > window.innerHeight * 0.5) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+
+            // Update progress bar
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (currentScroll / docHeight) * 100;
+            progress.style.width = scrollPercent + '%';
+
+            lastScroll = currentScroll;
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.85;
+
+                if (isVisible) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate numbers on scroll
+        const animateNumbers = () => {
+            const numbers = document.querySelectorAll('.stat-card__number');
+
+            numbers.forEach(num => {
+                if (num.dataset.animated) return;
+
+                const rect = num.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    const target = parseInt(num.textContent);
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            num.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            num.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                    num.dataset.animated = 'true';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateNumbers);
+        window.addEventListener('load', animateNumbers);
+    </script>
+</body>
+</html>
