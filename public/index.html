@@ -342,6 +342,9 @@
             padding: var(--space-lg);
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--color-border);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
         }
 
         .hero__visual-card--accent {
@@ -574,7 +577,7 @@
             .abstract__content {
                 display: flex;
                 flex-direction: column;
-                gap: var(--space-xl);
+                gap: var(--space-md);
             }
         }
 
@@ -588,44 +591,28 @@
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-sm);
-            margin-top: var(--space-lg);
+            margin-top: var(--space-md);
+            margin-bottom: var(--space-xs);
             max-width: 200px;
         }
 
         @media (max-width: 768px) {
             .abstract__sidebar {
                 position: static;
-                margin-bottom: var(--space-xl);
+                margin-bottom: var(--space-md);
                 width: 100%;
             }
             .abstract__keywords {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none !important;
-                -ms-overflow-style: none !important;
-                margin-top: var(--space-md);
-                margin-bottom: 0;
-                padding-bottom: var(--space-xs);
+                flex-wrap: wrap;
+                margin-top: var(--space-sm);
+                margin-bottom: var(--space-xs);
                 width: 100%;
                 max-width: 100%;
                 box-sizing: border-box;
             }
-            .abstract__keywords::-webkit-scrollbar {
-                display: none !important;
-                width: 0 !important;
-                height: 0 !important;
-            }
-            .abstract__keywords::-webkit-scrollbar-track {
-                display: none !important;
-            }
-            .abstract__keywords::-webkit-scrollbar-thumb {
-                display: none !important;
-            }
             .abstract__text {
                 clear: both;
-                margin-top: 0;
+                margin-top: var(--space-xs);
                 width: 100%;
             }
         }
@@ -722,6 +709,11 @@
             }
             .connection-matrix-grid {
                 min-width: 700px !important;
+            }
+
+            /* Key References - Mobile Friendly */
+            .references-grid {
+                grid-template-columns: 1fr !important;
             }
         }
 
@@ -1333,7 +1325,7 @@
             <div class="hero__right">
                 <div class="hero__visual-card hero__visual-card--accent">
                     <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-sm);">RESEARCH FRAMEWORK</div>
-                    <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                    <div style="display: flex; flex-direction: column; gap: var(--space-md); flex: 1;">
                         <div style="display: flex; align-items: center; gap: var(--space-md);">
                             <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📚</div>
                             <div>
@@ -1360,7 +1352,7 @@
 
                 <div class="hero__visual-card">
                     <div style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--color-text-muted); margin-bottom: var(--space-sm);">KEY EVIDENCE</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); flex: 1;">
                         <div style="text-align: center; padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
                             <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">g=0.86</div>
                             <div style="font-size: 0.75rem; color: var(--color-text-light);">Explicit Feedback</div>
@@ -2231,7 +2223,7 @@
             <p class="section-subtitle animate-on-scroll">Mapping theoretical foundations to instructional mechanisms and design outcomes</p>
 
             <!-- Interactive Connection Matrix -->
-            <div class="animate-on-scroll connection-matrix-container" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+            <div class="animate-on-scroll connection-matrix-container" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-top: var(--space-xl); margin-bottom: var(--space-2xl);">
                 <h3 style="text-align: center; margin-bottom: var(--space-xl);">Theory → Mechanism Connection Matrix</h3>
 
                 <div class="connection-matrix-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 calc(-1 * var(--space-2xl)); padding: 0 var(--space-2xl);">
@@ -2447,7 +2439,7 @@
             <h2 class="section-title animate-on-scroll">Key Findings</h2>
             <p class="section-subtitle animate-on-scroll">Four major findings synthesized from 17 empirical studies</p>
 
-            <div class="key-findings-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl);">
+            <div class="key-findings-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); margin-top: var(--space-xl);">
                 <!-- Finding 1 -->
                 <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: var(--space-md); right: var(--space-md); font-family: var(--font-mono); font-size: 3rem; opacity: 0.15; font-weight: 700;">01</div>
@@ -2506,7 +2498,7 @@
             <p class="section-subtitle animate-on-scroll">Four evidence-based recommendations for AI-powered ESL speaking system design</p>
 
             <!-- 4 Application Cards with KPIs -->
-            <div class="design-applications-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); margin-bottom: var(--space-3xl);">
+            <div class="design-applications-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); margin-top: var(--space-xl); margin-bottom: var(--space-3xl);">
                 <!-- Application 1 -->
                 <div class="animate-on-scroll" style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden;">
                     <div style="background: var(--color-primary); color: white; padding: var(--space-lg); text-align: center;">
@@ -2778,7 +2770,7 @@
             <p class="section-subtitle animate-on-scroll">Implications, limitations, and future directions</p>
 
             <!-- Evidence Summary -->
-            <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl);">
+            <div class="animate-on-scroll" style="background: linear-gradient(135deg, var(--color-primary) 0%, #2d7d9a 100%); color: white; border-radius: var(--radius-xl); padding: var(--space-2xl); margin-top: var(--space-xl); margin-bottom: var(--space-2xl);">
                 <h3 style="color: white; text-align: center; margin-bottom: var(--space-xl);">Evidence Summary</h3>
                 <div class="evidence-summary-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-xl); text-align: center;">
                     <div>
@@ -2884,7 +2876,7 @@
             <h2 class="section-title animate-on-scroll">Key References</h2>
             <p class="section-subtitle animate-on-scroll">Selected citations from the 17 empirical studies reviewed</p>
 
-            <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-lg); font-size: 0.85rem;">
+            <div class="animate-on-scroll references-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-lg); font-size: 0.85rem; margin-top: var(--space-xl);">
                 <div style="background: var(--color-bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--color-primary);">
                     <p style="color: var(--color-text-light); line-height: 1.6;">Anderson, J. R. (2015). <em>Cognitive Psychology and Its Implications</em> (8th ed.). Worth Publishers.</p>
                 </div>
